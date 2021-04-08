@@ -16,7 +16,6 @@ CREATE TABLE weapons(
 weapon_id int NOT NULL auto_increment,
 player_id int NOT NULL,
 weapon varchar(60) NOT NULL,
-ammo_type varchar(60) NOT NULL,
 PRIMARY KEY (weapon_id),
 FOREIGN KEY (player_id) REFERENCES players (player_id)
 );
