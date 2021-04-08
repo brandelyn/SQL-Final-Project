@@ -12,7 +12,7 @@ import videoGame.entity.Player;
 public class PlayerDao {
 	
 	public void createPlayer(String playerName) throws SQLException {
-		String sql = "INSERT INTO player (player_name) VALUES (?)";
+		String sql = "INSERT INTO players (player_name) VALUES (?)";
 		Connection connection = null;
 		PreparedStatement statement = null;
 		
@@ -34,7 +34,7 @@ public class PlayerDao {
 	}
 	
 	public List<Player> fetchPlayers() throws SQLException {
-		String sql = "SELECT * FROM player"; 
+		String sql = "SELECT * FROM players"; 
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
@@ -67,7 +67,7 @@ public class PlayerDao {
 	}
 	
 	public void modifyPlayer(int id, String playerName) throws SQLException {
-		String sql = "UPDATE player SET player_name = ? WHERE player_id = ?";
+		String sql = "UPDATE players SET player_name = ? WHERE player_id = ?";
 		Connection connection = null;
 		PreparedStatement statement = null;
 		
@@ -90,7 +90,7 @@ public class PlayerDao {
 	}
 	
 	public void deletePlayer(int playerId) throws SQLException {
-		String sql = "DELETE FROM player WHERE player_id = ?";
+		String sql = "DELETE FROM players WHERE player_id = ?";
 		Connection connection = null;
 		PreparedStatement statement = null;
 		
