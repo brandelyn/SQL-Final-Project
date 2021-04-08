@@ -4,13 +4,17 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import videoGame.dao.AbilityDao;
 import videoGame.dao.PlayerDao;
+import videoGame.dao.WeaponDao;
 import videoGame.entity.Player;
 
 public class VideoGameApplication {
 
 	private Scanner scanner = new Scanner(System.in);
 	private PlayerDao playerDao = new PlayerDao();
+	private AbilityDao abilityDao = new AbilityDao();
+	private WeaponDao weaponDao = new WeaponDao();
 
 	public static void main(String[] args) {
 		new VideoGameApplication().run();
@@ -84,7 +88,13 @@ public class VideoGameApplication {
 	private void createPlayer() throws SQLException {
 		System.out.print("Enter a Player name: ");
 		String playerName = scanner.nextLine();
-		playerDao.createPlayer(playerName);
+		int playerId = playerDao.createPlayer(playerName);
+		System.out.print("Enter an Ability: ");
+		String ability = scanner.nextLine();
+		abilityDao.createAbility(ability, playerId);
+		System.out.print("Enter a weapon: ");
+		String weapon = scanner.nextLine();
+		weaponDao.createWeapon(weapon, playerId);
 		
 	}
 
