@@ -41,7 +41,9 @@ public class PlayerDao {
 	}
 	
 	public List<Player> fetchPlayers() throws SQLException {
-		String sql = "SELECT * FROM players"; 
+		String sql = "select * from players p\r\n"
+				+ "inner join abilities a on p.player_id = a.player_id \r\n"
+				+ "inner join weapons w on p.player_id = w.player_id"; 
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet rs = null;
@@ -55,7 +57,9 @@ public class PlayerDao {
 		    while(rs.next()) {
 		    	int playerId = rs.getInt("player_id");
 		    	String playerName = rs.getString("player_name");
-		    	Player player = new Player(playerId, playerName);
+		    	String weapon = rs.getString("weapon");
+		    	String ability = rs.getString("ability");
+		    	Player player = new Player(playerId, playerName, weapon, ability);
 		    	players.add(player);
 		    }
 			return players;

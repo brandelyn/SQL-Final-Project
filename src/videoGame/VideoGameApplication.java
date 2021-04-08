@@ -23,38 +23,37 @@ public class VideoGameApplication {
 	private void run() {
 		while (true) {
 			printInstructions();
-			
+
 			System.out.println("Enter a selection: ");
 			String choice = scanner.nextLine();
-			
-			if(choice.isBlank()) {
+
+			if (choice.isBlank()) {
 				break;
 			}
 			try {
-			switch(choice) {
-			case "1":
-				createPlayer();
-				break;
-				
-			case "2":
-				modifyPlayer();
-				break;
-				
-			case "3":
-				listPlayers();
-				break;
-			
-			case "4":
-				deletePlayer();
-				break;
-				
+				switch (choice) {
+				case "1":
+					createPlayer();
+					break;
+
+				case "2":
+					modifyPlayer();
+					break;
+
+				case "3":
+					listPlayers();
+					break;
+
+				case "4":
+					deletePlayer();
+					break;
+
 				default:
 					System.out.println("Invalid selection, try again.");
-			}
-		}
-			catch(Exception e) {
-			System.out.println("You got an error!: " + e.getMessage());
-			break;
+				}
+			} catch (Exception e) {
+				System.out.println("You got an error!: " + e.getMessage());
+				break;
 			}
 		}
 	}
@@ -63,7 +62,7 @@ public class VideoGameApplication {
 		listPlayers();
 		System.out.println("Enter the Player ID to delete:");
 		int id = Integer.parseInt(scanner.nextLine());
-		
+
 		playerDao.deletePlayer(id);
 		listPlayers();
 	}
@@ -72,11 +71,33 @@ public class VideoGameApplication {
 		listPlayers();
 		System.out.println("Enter the Player ID to modify:");
 		int id = Integer.parseInt(scanner.nextLine());
-		
-		System.out.println("Enter the new Player name: ");
-		String playerName = scanner.nextLine();
-		
-		playerDao.modifyPlayer(id, playerName);
+
+		printModifyInstructions();
+
+		System.out.println("Enter a selection: ");
+		String choice = scanner.nextLine();
+
+		try {
+			switch (choice) {
+			case "1":
+				modifyPlayerName(id);
+				break;
+
+			case "2":
+				modifyAbility(id);
+				break;
+
+			case "3":
+				modifyWeapon(id);
+				break;
+
+			default:
+				System.out.println("Invalid selection, try again.");
+			}
+		} catch (Exception e) {
+			System.out.println("You got an error!: " + e.getMessage());
+
+		}
 		listPlayers();
 	}
 
@@ -95,7 +116,7 @@ public class VideoGameApplication {
 		System.out.print("Enter a weapon: ");
 		String weapon = scanner.nextLine();
 		weaponDao.createWeapon(weapon, playerId);
-		
+
 	}
 
 	private void printInstructions() {
@@ -104,6 +125,32 @@ public class VideoGameApplication {
 		System.out.println("2: Modify a player.");
 		System.out.println("3: List all players.");
 		System.out.println("4: Delete a player.");
-		
+
+	}
+
+	private void printModifyInstructions() {
+		System.out.println(" Select an option:\n -------------------------------- ");
+		System.out.println("1: Modify Player Name.");
+		System.out.println("2: Modify Ability");
+		System.out.println("3: Modify Weapon.");
+	}
+
+	private void modifyPlayerName(int id) throws SQLException {
+		System.out.print("Enter a new player name: ");
+		String playerName = scanner.nextLine();
+		playerDao.modifyPlayer(id, playerName);
+	}
+
+	private void modifyAbility(int id) throws SQLException {
+		System.out.print("Enter a new ability: ");
+		String ability = scanner.nextLine();
+		abilityDao.modifyAbility(id, ability);
+
+	}
+
+	private void modifyWeapon(int id) throws SQLException {
+		System.out.print("Enter a new weapon: ");
+		String weapon = scanner.nextLine();
+		weaponDao.modifyWeapon(id, weapon);
 	}
 }

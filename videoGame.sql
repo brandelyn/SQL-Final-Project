@@ -17,7 +17,8 @@ weapon_id int NOT NULL auto_increment,
 player_id int NOT NULL,
 weapon varchar(60) NOT NULL,
 PRIMARY KEY (weapon_id),
-FOREIGN KEY (player_id) REFERENCES players (player_id)
+FOREIGN KEY (player_id) REFERENCES players (player_id) ON DELETE CASCADE 
+
 );
 
 CREATE TABLE abilities(
@@ -25,5 +26,5 @@ ability_id int NOT NULL auto_increment,
 player_id int NOT NULL,
 ability varchar(60) NOT NULL,
 PRIMARY KEY (ability_id),
-FOREIGN KEY (player_id) REFERENCES players (player_id)
+FOREIGN KEY (player_id) REFERENCES players (player_id) ON DELETE CASCADE 
 );
